@@ -24,8 +24,12 @@ public class LC0002 {
         lc.printListNode(l1);
         lc.printListNode(l2);
 
+        long t1 = System.currentTimeMillis();
         ListNode rln = lc.addTwoNumbers(l1, l2);
+        long t2 = System.currentTimeMillis();
+
         lc.printListNode(rln);
+        System.out.println("execution duration = " + (t2 - t1));
     }
 
     private void printListNode(ListNode ln) {

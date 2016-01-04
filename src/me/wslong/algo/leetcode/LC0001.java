@@ -18,9 +18,12 @@ public class LC0001 {
         int target = 6;
 
         LC0001 lc = new LC0001();
+        long t1 = System.currentTimeMillis();
         int[] results = lc.twoSum(nums, target);
+        long t2 = System.currentTimeMillis();
 
         System.out.println("index1=" + results[0] + ", index2=" + results[1]);
+        System.out.println("execution duration = " + (t2 - t1));
     }
 
     public int[] twoSum(int[] nums, int target) {
