@@ -16,48 +16,40 @@ import java.io.InputStreamReader;
 
  */
 public class Ando13 {
-    // TODO
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String line = br.readLine();
         long t1 = System.currentTimeMillis();
-        int N = Integer.parseInt(line);
-        int[] n = new int[N];
-        for (int i = 1; i <= N; i++) {
-            int tmp = i;
-            while (tmp % 10 == 0) {
-                tmp = tmp / 10;
+        int r = 0;
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        int n = Integer.parseInt(line);
+        int a[] = new int[] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        
+        for (i = 1; i <= n; i++) {
+            for (j = 0; j < 17; j++) {
+                a[j] = a[j] * i;
             }
-            n[i - 1] = tmp;
-        }
-        int[] m = new int[100000];
-        m[0] = 1;
-        for (int i = 0; i < N; i++) {
-            int v = i + 1;
-            int tmp = 0;
-            for (int j = 0; j < m.length; j++) {
-                int mv = m[j] * v + tmp;
-                int d = mv / 10;
-                int r = mv % 10;
-                tmp = d;
-                m[j] = r;
+            for (j = 0; j < 17 - 1; j++) {
+                a[j + 1] += a[j] / 10;
+                a[j] = a[j] % 10;
+            }
+            for (j = 0; j < 6; j++) {
+                if (a[0] == 0) {
+                    for (k = 0; k < 17 - 1; k++) {
+                        a[k] = a[k + 1];
+                        a[16] = a[15] / 10;
+                        a[15] = a[15] % 10;
+                    }
+                }
             }
         }
-        int endCount = 0;
-        for (int i = 0; i < 100000; i++) {
-            if (m[i] != 0) {
-                break;
-            }
-            endCount++;
-        }
-        System.out.println(endCount);
-
-        String tmp = "";
-        for (int i = 99999; i >= 0; i--) {
-            tmp += m[i];
+        
+        for (i = 8; i >= 0; i--) {
+            r = r * 10 + a[i];
         }
 
-        String r = tmp.substring(100000 - endCount - 9, 100000 - endCount);
         long t2 = System.currentTimeMillis();
         System.out.println(r);
         System.out.println((t2 - t1) + " ms");
